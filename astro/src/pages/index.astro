@@ -1,76 +1,79 @@
 ---
 import Layout from '../layouts/GenLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
 import '../styles/index.css';
 ---
 
 <Layout>
 	<main>
-		<div class="hero w-full">
-			<div class="hero-section">
-				<div class="container">
-					<div class="hero-inside">
-						<div class="hero-left">
-							<div class="hero-text">
-								<div class="welcome-text"> <strong>Hello</strong> I'm</div>
-								<div class="hero-bottom-text">
-									<div class="hero-title">
-										<h1 class="hero-name">Paco</h1>
+		<div class="hero h-screen w-full bg-gray-800 relative">
+			<div class="absolute inset-0 bg-gradient-to-br from-gray-600 to-gray-800 opacity-90"></div>
+			<div class="absolute inset-0 bg-noise"></div>
+			<div class="relative flex items-center justify-center h-full text-white">
+				<div class="hero-section">
+					<div class="container">
+						<div class="hero-inside">
+							<div class="hero-left">
+								<div class="hero-text">
+									<div class="welcome-text"> <strong>Hello,</strong> I'm</div>
+									<div class="hero-bottom-text">
+										<div class="hero-title">
+											<h1 class="hero-name">Paco</h1>
+										</div>
+										<p class="hero-tagline">Mostly a C++ developer</p>
 									</div>
-									<p class="hero-tagline">C++ (Mostly) developer</p>
 								</div>
 							</div>
-						</div>
-						<div class="hero-right">
-							<!-- <div class="hero-emoji-wrap">
-								<div class="emoji-text">Text above image</div>
-							</div> -->
-							<div class="hero-emoji-wrap">
-								<img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/3d0f6/MainAfter.avif"/>
+							<div class="hero-right">
+								<!-- <div class="hero-emoji-wrap">
+									<div class="emoji-text">Text above image</div>
+								</div> -->
+								<div class="hero-emoji-wrap">
+									<img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/3d0f6/MainAfter.avif"/>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="container about-wrapper">
 			<div class="about-left">
 				<h2 class="about-title">👨‍💻 About Me</h2>
-				<p class="last-paragraph">I'm a self-taught software designer with a heavy focus on user interface &amp; user experience. My preferred stack is app design, digital products &amp; UI/UX.</p>
+				<p class="last-paragraph">I'm a software developer who began my journey as a graphics developer for a game UI library, later transitioning into the exciting world of AI. My work blends creativity and technology, and I’m always on the lookout for new ideas to explore and share.</p>
 			</div>
-				<div class="about-right">
-					<p>I currently live in <strong>Hawaii</strong> 🌴, US State. I enjoy <strong>reading books</strong> 📗 and listening to <strong>podcasts</strong>🎙️. I love creating creative content, and you can find most of my works here.</p>
-					<p>Apart from this I love to travel, mentor designers, review design portfolios &amp; read books on everything related to design. I have also given design talks in various educational institutions.</p>
-				</div>
+			<div class="about-right">
+				<p>I enjoy diving into new tech, exploring the latest innovations in the automotive world 🚗, and seeking out thrilling adventures 🌍. Through this space, I’ll share not only my ideas but also the challenges I face along the way, hoping to inspire and connect with like-minded enthusiasts.</p>
+				<p>Beyond coding, I’m driven by a love for innovation and problem-solving, and I’m excited to document this journey here.</p>
 			</div>
-		</div>
-		<div class="discover-work-section">
-			<div class="container w-container">
-				<h2 class="section-title">Discover My Work</h2>
-				<div class="discover-work-wrap w-dyn-list">
-					<div role="list" class="discover-work-list w-dyn-items">
+		  </div>
+
+		<div class="container w-container">
+			<h2 class="section-title">Discover My Work</h2>
+			<div class="discover-work-wrap w-dyn-list">
+				<div role="list" class="discover-work-list w-dyn-items">
+				{
+					posts.slice(0, 3).map((post) => (
 						<div role="listitem" class="discover-work-item w-dyn-item">
-							<a href="/work/metalo-no-code-builder" class="work-link w-inline-block">
-								<div style="background-image:url(&quot;https://cdn.prod.website-files.com/62f0ff467971db549a9c6050/62f23f4673c01a6a0bacf678_w-thumb-4.jpg&quot;)" class="discover-thumb"></div>
+							<a href={`/blog/${post.slug}/`} class="work-link w-inline-block">
+								<div style={`background-image:url(${post.data.heroImage})`} class="discover-thumb"></div>
 								<div class="work-info">
-									<div class="project-category">Website</div>
-								<h3 class="project-list-title">Metalo No-Code Builder</h3>
+									{/* <div class="project-category">{post.data.}</div> */}
+									<h3 class="project-list-title">{post.data.title}</h3>
 								</div>
 							</a>
 						</div>
-						<div role="listitem" class="discover-work-item w-dyn-item">
-							<a href="/work/construction-landing-page" class="work-link w-inline-block">
-								<div style="background-image:url(&quot;https://cdn.prod.website-files.com/62f0ff467971db549a9c6050/62f23f62eafac5897452e774_w-thumb-5.jpg&quot;)" class="discover-thumb"></div>
-								<div class="work-info">
-									<div class="project-category">Landing</div>
-									<h3 class="project-list-title">Construction Landing Page</h3>
-								</div>
-							</a>
-						</div>
-					</div>
+					))
+				}
 				</div>
 				<div class="view-all-button">
-					<a href="/work" class="primary-button view-button">View All Work</a>
+					<a href="/blog" class="primary-button view-button">View All Work</a>
 				</div>
 			</div>
 		</div>

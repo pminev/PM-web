@@ -5,6 +5,7 @@
  */
 
 :root {
+	--main-gray: #ADACA8;
 	--accent: rgb(217,253,153);
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;

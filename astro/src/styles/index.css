@@ -1,12 +1,15 @@
+.bg-noise {
+    background-image: url('Polygon.svg');
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+}
+
 .hero {
-    background-color: #12141d;
     margin-bottom: 150px;
-    box-sizing: border-box;
 }
 
 .hero-section {
     padding-top: 100px;
-    /* padding-bottom: 80px; */
 }
 
 .container {
@@ -16,6 +19,7 @@
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
+    margin-bottom: 100px;
 }
 
 .hero-inside {
@@ -111,10 +115,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
     display: grid;
-}
-
-.discover-work-section {
-    padding-bottom: 150px;
 }
 
 .work-link {
