@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "./astro/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
