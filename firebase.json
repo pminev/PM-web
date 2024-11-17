@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "target": "pacominevpersonal",
     "public": "./astro/dist",
     "ignore": [
       "firebase.json",

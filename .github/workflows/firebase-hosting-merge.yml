@@ -15,7 +15,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTO_MARKET_INFO }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PERSONAL_BLOG_ED7EB }}
           channelId: live
-          projectId: auto-market-info
-          target: pacominevpersonal
+          projectId: personal-blog-ed7eb
