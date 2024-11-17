@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "auto-market-info"
-  }
+  },
+  "targets": {
+    "auto-market-info": {
+      "hosting": {
+        "pacominevpersonal": [
+          "./astro/dist"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
