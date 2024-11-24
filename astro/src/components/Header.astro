@@ -4,10 +4,10 @@ import { LINKS } from '../consts';
 ---
 
 <header>
-	<nav class="w-full fixed top-0 left-0 z-50">
-		<div class="flex items-center pl-16">
+	<nav class="nav-full w-full fixed top-0 left-0 z-50">
+		<div class="flex items-center sm:pl-16">
 			<img class="w-16 h-16 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/7622795?v=4" alt="PacoMinev's Logo" width="32" height="32" />
-			<div class="flex-1 rounded-lg text-center">
+			<div class="sm:flex-1 rounded-lg text-center">
 				<h2><a href="/">PacoMinev's Blog</a></h2>
 			</div>
 		</div>
@@ -37,7 +37,38 @@ import { LINKS } from '../consts';
 			</a>
 		</div>
 	</nav>
+
+	<!-- Mobile Navigation -->
+	<nav class="nav-mini sm:hidden fixed top-0 left-0 w-full bg-white shadow z-50">
+		<div class="flex items-center justify-between p-4">
+			<img class="w-16 h-16 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/7622795?v=4" alt="PacoMinev's Logo" width="32" height="32" />
+			<h2><a href="/">PacoMinev's Blog</a></h2>
+		<button id="menu-toggle" class="p-2 focus:outline-none">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+			</svg>
+		</button>
+		</div>
+		<div id="mobile-menu" class="hidden flex-col flex flex-1 pace-y-4 p-4">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/work">Work</HeaderLink>
+		</div>
+	</nav>
 </header>
+
+<script>
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+		const menuToggle = document.getElementById('menu-toggle');
+		const mobileMenu = document.getElementById('mobile-menu');
+
+		menuToggle.addEventListener('click', () => {
+			mobileMenu.classList.toggle('hidden');
+		});
+		});
+	}
+</script>
 
 <style>
 	header {
@@ -49,6 +80,10 @@ import { LINKS } from '../consts';
 	nav {
 		color: white;
 		background-color: rgb(19, 20, 28);
+
+	}
+	.nav-full {
+		display: flex;
 	}
 	h2 {
 		color: white;
@@ -65,6 +100,17 @@ import { LINKS } from '../consts';
 		align-items: center;
 		justify-content: space-between;
 	}
+
+	.nav-full {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.nav-mini {
+		display: none;
+	}
+
 	nav a {
 		padding: 1em 0.5em;
 		color: var(--black);
@@ -79,9 +125,62 @@ import { LINKS } from '../consts';
 	.social-links a {
 		display: flex;
 	}
-	@media (max-width: 720px) {
+	/* Responsive Styles */
+	@media (max-width: 900px) {
+		nav {
+			flex-direction: column; /* Stack items vertically on smaller screens */
+			align-items: stretch;
+		}
+
+		.nav-full {
+			display: none;
+		}
+
+		.nav-mini {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.internal-links {
+			justify-content: center; /* Center-align links */
+		}
+
+		.social-links {
+			margin-top: 0.5em;
+			justify-content: center;
+		}
+	}
+
+	@media (max-width: 390px) {
+		header {
+			padding: 0.5em; /* Reduce padding for small screens */
+		}
+
+		h2 {
+			font-size: 1em; /* Smaller font size for the header title */
+		}
+
+		img {
+			width: 40px; /* Reduce logo size */
+			height: 40px;
+		}
+
+		nav a {
+			font-size: 0.8em; /* Reduce font size for links */
+		}
+
+		.internal-links {
+			display: none;
+			gap: 0.5em; /* Reduce spacing between links */
+		}
+
 		.social-links {
 			display: none;
+		}
+
+		.social-links svg {
+			width: 20px; /* Further reduce icon size */
+			height: 20px;
 		}
 	}
 </style>

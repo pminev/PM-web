@@ -13,7 +13,6 @@
 }
 
 .container {
-    max-width: 1296px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
@@ -130,16 +129,6 @@
     box-shadow: 3px 0 5px var(--title);
 }
 
-.discover-thumb {
-    background-image: url("https://d3e54v103j8qbb.cloudfront.net/img/background-image.svg");
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    min-height: 300px;
-}
-
 .work-info {
     border-top: 1px solid var(--title);
     padding: 30px;
@@ -182,3 +171,97 @@ a:any-link {
     cursor: auto;
 }
 
+/* Common styles for the grid and carousel */
+.discover-item {
+    width: 100%;
+    max-width: 100%;
+}
+
+.discover-thumb {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    min-height: 200px;
+}
+
+.work-info {
+    border-top: 1px solid var(--title);
+    padding: 20px;
+}
+
+.discover-grid {
+    display: grid;
+}
+
+/* Mobile styles: Switch to carousel */
+@media (max-width: 640px) {
+.discover-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+}
+
+.discover-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 70%;
+}
+}
+
+@media screen and (max-width: 991px) {
+    .welcome-text, .hero-name, .hero-small-text {
+        font-size: 70px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .welcome-text, .hero-name {
+        font-size: 42px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .hero-left {
+        min-height: 400px;
+        padding-right: 35px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hero-left {
+        max-width: 100%;
+        min-height: 0;
+        padding-bottom: 20px;
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hero-inside {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hero-buttons {
+        margin-top: 0;
+        bottom: -35px;
+        left: 15px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .hero-bottom-text {
+        margin-top: 0;
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hero-right {
+        max-width: 100%;
+    }
+}

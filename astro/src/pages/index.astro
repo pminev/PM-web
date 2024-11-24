@@ -2,40 +2,44 @@
 import Layout from '../layouts/GenLayout.astro';
 import { getCollection } from 'astro:content';
 
+import '../styles/index.css';
+
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-import '../styles/index.css';
 ---
 
 <Layout>
 	<main>
-		<div class="hero h-screen w-full bg-gray-800 relative">
+		<div class="hero w-full bg-gray-800 relative">
+			<!-- Gradient and noise overlay -->
 			<div class="absolute inset-0 bg-gradient-to-br from-gray-600 to-gray-800 opacity-90"></div>
 			<div class="absolute inset-0 bg-noise"></div>
-			<div class="relative flex items-center justify-center h-full text-white">
-				<div class="hero-section">
-					<div class="container">
-						<div class="hero-inside">
-							<div class="hero-left">
+
+			<!-- Main content -->
+			<div class="relative flex items-center justify-center text-white">
+				<div class="hero-section w-full">
+					<div class="container px-3 py-">
+						<!-- Hero Content: Centered for both mobile and desktop -->
+						<div class="flex flex-col md:flex-row items-center justify-center">
+							<!-- Left Section: Text -->
+							<div class="hero-left mb-8 md:mb-0 md:w-1/2 text-center md:text-left">
 								<div class="hero-text">
-									<div class="welcome-text"> <strong>Hello,</strong> I'm</div>
-									<div class="hero-bottom-text">
-										<div class="hero-title">
-											<h1 class="hero-name">Paco</h1>
-										</div>
-										<p class="hero-tagline">Mostly a C++ developer</p>
+									<div class="welcome-text text-3xl md:text-4xl font-light leading-snug">
+										<strong>Hello,</strong> I'm
+									</div>
+									<div class="hero-bottom-text mt-4">
+										<h1 class="hero-name text-3xl md:text-6xl font-semibold leading-tight">Paco</h1>
+										<p class="hero-tagline mt-2 text-lg md:text-xl">Mostly a C++ developer</p>
 									</div>
 								</div>
 							</div>
-							<div class="hero-right">
-								<!-- <div class="hero-emoji-wrap">
-									<div class="emoji-text">Text above image</div>
-								</div> -->
-								<div class="hero-emoji-wrap">
-									<img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/3d0f6/MainAfter.avif"/>
-								</div>
+
+							<!-- Right Section: Image -->
+							<div class="hero-right md:w-1/2 flex justify-center md:justify-end">
+								<img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/3d0f6/MainAfter.avif"
+									class="w-3/4 max-w-xs md:max-w-sm mx-auto rounded-lg shadow-xl" alt="Hero Image" />
 							</div>
 						</div>
 					</div>
@@ -43,6 +47,7 @@ import '../styles/index.css';
 			</div>
 		</div>
 
+		<!-- About me section -->
 		<div class="container about-wrapper">
 			<div class="about-left">
 				<h2 class="about-title">👨‍💻 About Me</h2>
@@ -52,29 +57,31 @@ import '../styles/index.css';
 				<p>I enjoy diving into new tech, exploring the latest innovations in the automotive world 🚗, and seeking out thrilling adventures 🌍. Through this space, I’ll share not only my ideas but also the challenges I face along the way, hoping to inspire and connect with like-minded enthusiasts.</p>
 				<p>Beyond coding, I’m driven by a love for innovation and problem-solving, and I’m excited to document this journey here.</p>
 			</div>
-		  </div>
+		</div>
 
-		<div class="container w-container">
+		<!-- Discover my work -->
+		<div class="w-container p-4">
 			<h2 class="section-title">Discover My Work</h2>
-			<div class="discover-work-wrap w-dyn-list">
-				<div role="list" class="discover-work-list w-dyn-items">
-				{
-					posts.slice(0, 3).map((post) => (
-						<div role="listitem" class="discover-work-item w-dyn-item">
-							<a href={`/blog/${post.slug}/`} class="work-link w-inline-block">
-								<div style={`background-image:url(${post.data.heroImage})`} class="discover-thumb"></div>
-								<div class="work-info">
-									{/* <div class="project-category">{post.data.}</div> */}
-									<h3 class="project-list-title">{post.data.title}</h3>
-								</div>
-							</a>
-						</div>
-					))
-				}
+			<div
+				class="discover-grid grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4"
+			>
+			{posts.slice(0, 3).map((post) => (
+				<div class="discover-item flex-shrink-0">
+				<a href={`/blog/${post.slug}/`} class="work-link w-inline-block">
+					<div
+					style={`background-image:url(${post.data.heroImage})`}
+					class="discover-thumb"
+					></div>
+					<div class="work-info">
+					<div class="project-list-title text-xl text-stone-950">{post.data.title}</div>
+					</div>
+				</a>
 				</div>
-				<div class="view-all-button">
-					<a href="/blog" class="primary-button view-button">View All Work</a>
-				</div>
+			))}
+			</div>
+
+			<div class="text-right mt-4">
+			<a href="/blog" class="primary-button view-button">View All Work</a>
 			</div>
 		</div>
 	</main>
