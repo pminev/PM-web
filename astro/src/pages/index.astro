@@ -5,10 +5,26 @@ import { LINKS } from '../consts';
 
 import '../styles/index.css';
 
-const posts = (await getCollection('blog')).sort(
+const blogPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+const workPosts = (await getCollection('work')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const postSections = [
+	{
+		title: "Discover My Blog",
+		btnText: "View all posts",
+		posts: blogPosts
+	},
+	{
+		title: "Discover My Work",
+		btnText: "View all work",
+		posts: workPosts
+	}
+];
 ---
 
 <Layout>
@@ -88,31 +104,34 @@ const posts = (await getCollection('blog')).sort(
 			</div>
 		</div>
 
-		<!-- Discover my work -->
-		<div class="w-container p-4">
-			<h2 class="section-title">Discover My Work</h2>
-			<div
-				class="discover-grid grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4"
-			>
-			{posts.slice(0, 3).map((post) => (
-				<div class="discover-item flex-shrink-0">
-				<a href={`/blog/${post.slug}/`} class="work-link w-inline-block">
+		{
+			postSections.map(({ title, btnText, posts }) => (
+				<div class="w-container p-4">
+					<h2 class="section-title">{title}</h2>
 					<div
-					style={`background-image:url(${post.data.heroImage})`}
-					class="discover-thumb"
-					></div>
-					<div class="work-info">
-					<div class="project-list-title text-xl text-stone-950">{post.data.title}</div>
+						class="discover-grid grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4"
+					>
+					{posts.slice(0, 3).map((post) => (
+						<div class="discover-item flex-shrink-0">
+						<a href={`/${title.toLowerCase()}/${post.slug}/`} class="work-link w-inline-block">
+							<div
+							style={`background-image:url(${post.data.heroImage})`}
+							class="discover-thumb"
+							></div>
+							<div class="work-info">
+							<div class="project-list-title text-xl text-stone-950">{post.data.title}</div>
+							</div>
+						</a>
+						</div>
+					))}
 					</div>
-				</a>
-				</div>
-			))}
-			</div>
 
-			<div class="text-right mt-4">
-			<a href="/blog" class="primary-button view-button">View All Work</a>
-			</div>
-		</div>
+					<div class="text-right mt-4">
+					<a href={`/${title.toLowerCase()}`} class="primary-button view-button">{btnText}</a>
+					</div>
+				</div>
+			))
+		}
 	</main>
 </Layout>
 
