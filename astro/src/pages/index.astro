@@ -48,16 +48,22 @@ const posts = (await getCollection('blog')).sort(
 		</div>
 
 		<!-- About me section -->
-		<div class="container about-wrapper">
-			<div class="about-left">
-				<h2 class="about-title">👨‍💻 About Me</h2>
-				<p class="last-paragraph">I'm a software developer who began my journey as a graphics developer for a game UI library, later transitioning into the exciting world of AI. My work blends creativity and technology, and I’m always on the lookout for new ideas to explore and share.</p>
-			</div>
-			<div class="about-right">
-				<p>I enjoy diving into new tech, exploring the latest innovations in the automotive world 🚗, and seeking out thrilling adventures 🌍. Through this space, I’ll share not only my ideas but also the challenges I face along the way, hoping to inspire and connect with like-minded enthusiasts.</p>
-				<p>Beyond coding, I’m driven by a love for innovation and problem-solving, and I’m excited to document this journey here.</p>
+		<div class="container about-wrapper px-6">
+			<div class="flex flex-col md:flex-row items-center justify-between">
+				<!-- Left Section: Text -->
+				<div class="about-left mb-8 md:mb-0 md:w-1/2">
+					<h2 class="about-title text-3xl md:text-4xl mb-4">👨‍💻 About Me</h2>
+					<p class="last-paragraph text-lg md:text-xl">I'm a software developer who began my journey as a graphics developer for a game UI library, later transitioning into the exciting world of AI. My work blends creativity and technology, and I’m always on the lookout for new ideas to explore and share.</p>
+				</div>
+
+				<!-- Right Section: Text -->
+				<div class="about-right md:w-1/2 mt-8 md:mt-0">
+					<p class="text-lg md:text-xl mb-4">I enjoy diving into new tech, exploring the latest innovations in the automotive world 🚗, and seeking out thrilling adventures 🌍. Through this space, I’ll share not only my ideas but also the challenges I face along the way, hoping to inspire and connect with like-minded enthusiasts.</p>
+					<p class="text-lg md:text-xl">Beyond coding, I’m driven by a love for innovation and problem-solving, and I’m excited to document this journey here.</p>
+				</div>
 			</div>
 		</div>
+
 
 		<!-- Discover my work -->
 		<div class="w-container p-4">
