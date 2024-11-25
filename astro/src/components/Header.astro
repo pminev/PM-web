@@ -39,9 +39,9 @@ import { LINKS } from '../consts';
 	</nav>
 
 	<!-- Mobile Navigation -->
-	<nav class="nav-mini sm:hidden fixed top-0 left-0 w-full bg-white shadow z-50">
+	<nav id="mobile-nav" class="nav-mini fixed top-0 left-0 w-full bg-white z-50">
 		<div class="flex items-center justify-between p-4">
-			<img class="w-16 h-16 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/7622795?v=4" alt="PacoMinev's Logo" width="32" height="32" />
+			<a href="/"><img class="w-16 h-16 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/7622795?v=4" alt="PacoMinev's Logo" width="32" height="32" />
 			<h2><a href="/">PacoMinev's Blog</a></h2>
 		<button id="menu-toggle" class="p-2 focus:outline-none">
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +49,7 @@ import { LINKS } from '../consts';
 			</svg>
 		</button>
 		</div>
-		<div id="mobile-menu" class="hidden flex-col flex flex-1 pace-y-4 p-4">
+		<div id="mobile-menu" class="offscreen flex-col flex flex-1 pace-y-4 p-4">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/work">Work</HeaderLink>
@@ -60,12 +60,12 @@ import { LINKS } from '../consts';
 <script>
 	if (typeof window !== 'undefined') {
 		document.addEventListener('DOMContentLoaded', () => {
-		const menuToggle = document.getElementById('menu-toggle');
-		const mobileMenu = document.getElementById('mobile-menu');
+			const menuToggle = document.getElementById('menu-toggle');
+			const mobileMenu = document.getElementById('mobile-menu');
 
-		menuToggle.addEventListener('click', () => {
-			mobileMenu.classList.toggle('hidden');
-		});
+			menuToggle.addEventListener('click', () => {
+				mobileMenu.classList.toggle('visible');
+			});
 		});
 	}
 </script>
@@ -80,7 +80,6 @@ import { LINKS } from '../consts';
 	nav {
 		color: white;
 		background-color: rgb(19, 20, 28);
-
 	}
 	.nav-full {
 		display: flex;
@@ -112,7 +111,7 @@ import { LINKS } from '../consts';
 	}
 
 	nav a {
-		padding: 1em 0.5em;
+		padding: 0.25em 0.25em 0em 0.25em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
@@ -183,4 +182,24 @@ import { LINKS } from '../consts';
 			height: 20px;
 		}
 	}
+
+	#mobile-menu {
+		position: absolute;
+		top: 100%;
+		width: 100%;
+		height: 160%;
+		background-color: rgb(19, 20, 28);
+		pointer-events: none;
+		transform: translateY(-100%);
+		opacity: 0;
+		z-index: -10;
+		transition: opacity 0.3s, transform 0.3s ease;
+	}
+
+	#mobile-menu.visible {
+		transform: translateY(0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
 </style>
